@@ -16,8 +16,8 @@ export default function RegisterPage() {
     setLoading(true)
     try {
       await register(form.email, form.password, form.name, form.serie)
-      toast.success('Compte créé avec succès !')
-      navigate('/')
+      toast.success('Compte créé ! Vérifie ton email pour activer ton compte.')
+      navigate('/verify-email')
     } catch (err) {
       toast.error(err.code === 'auth/email-already-in-use' ? 'Email déjà utilisé' : 'Erreur lors de l\'inscription')
     } finally {

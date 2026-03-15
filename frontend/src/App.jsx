@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage'
 import DashboardPage from './pages/DashboardPage'
 import CoursPage from './pages/CoursPage'
 import CoursDetailPage from './pages/CoursDetailPage'
+import VerifyEmailPage from './pages/VerifyEmailPage'
 import ExercicesPage from './pages/ExercicesPage'
 import AssistantPage from './pages/AssistantPage'
 import PlanningPage from './pages/PlanningPage'
@@ -17,7 +18,8 @@ function PrivateRoute({ children }) {
       <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
     </div>
   )
-  return user ? children : <Navigate to="/login" />
+  if (!user) return <Navigate to="/login" />
+  return children
 }
 export default function App() {
   return (
@@ -27,6 +29,7 @@ export default function App() {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
           <Route path="/" element={<PrivateRoute><Layout /></PrivateRoute>}>
             <Route index element={<DashboardPage />} />
             <Route path="cours" element={<CoursPage />} />

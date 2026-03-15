@@ -5,6 +5,7 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  sendEmailVerification,
 } from 'firebase/auth'
 import { doc, setDoc, getDoc, updateDoc, increment, serverTimestamp } from 'firebase/firestore'
 import { auth, db } from '../utils/firebase'
@@ -77,6 +78,7 @@ export function AuthProvider({ children }) {
   const register = async (email, password, name, serie) => {
     const cred = await createUserWithEmailAndPassword(auth, email, password)
     await updateProfile(cred.user, { displayName: name })
+    await sendEmailVerification(cred.user)
     await setDoc(doc(db, 'users', cred.user.uid), {
       name,
       email,
