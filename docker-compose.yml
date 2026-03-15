@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./backend
+    container_name: bac_backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: bac_frontend
+    ports:
+      - "8080:3000"
+    restart: always
